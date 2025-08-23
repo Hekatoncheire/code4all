@@ -1,5 +1,8 @@
 # Story 1.1: Project Scaffolding & Environment Setup
 
+## Status
+Completed
+
 ## User Story
 As a developer, I want a well-defined project structure and a reproducible environment, so that I can start building the application efficiently and consistently.
 
