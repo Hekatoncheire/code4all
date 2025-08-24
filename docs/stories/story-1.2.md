@@ -17,10 +17,9 @@ Derived from Epic 1 in `docs/epics/epic-1.md` and PRD in `docs/prd.md`.
 
 ## Deliverables
 - MCP client function/module to query documentation (e.g., `src/client/mcp_client.py`).
-- LangChain Tool wrapper `documentation_search` (e.g., in `src/agent/tools.py`).
+- LangChain Tool wrapper `documentation_search_tools` and `_wrap_async_tool` (e.g., in `src/agent/tools.py`).
 - Minimal LangGraph agent wired with the tool (e.g., `src/agent/agent.py`).
-- Demo or unit test proving the tool invocation and result handling (e.g., `tests/test_mcp_client.py`).
-- Short README note describing how to run the demo/test.
+- Unit test proving the tool invocation and result handling (e.g., `tests/test_agent.py`).
 
 ## Constraints & Non-Functional Requirements
 - Use open-source components only; no paid APIs.
@@ -29,19 +28,15 @@ Derived from Epic 1 in `docs/epics/epic-1.md` and PRD in `docs/prd.md`.
 - Configuration via environment variables; document keys in `.env.example`.
 
 ## Implementation Plan (Tasks)
-- Create MCP client function in `src/client/mcp_client.py` (e.g., `query_documentation(query: str) -> str`).
+- Create MCP client class in `src/client/mcp_client.py`.
 - Add environment/config handling (e.g., MCP endpoint, auth if needed) and update `.env.example`.
-- Wrap the client as a LangChain Tool named `documentation_search` in `src/agent/tools.py` with description and input schema.
+- Wrap the client tools as LangChain Tools named `documentation_search_tools` in `src/agent/tools.py` with description and input schema.
 - Register the tool in the minimal LangGraph agent in `src/agent/agent.py` for initial wiring.
-- Add a smoke test in `tests/test_mcp_client.py` that mocks the MCP response and validates tool output flow.
-- Add a short demo path (CLI or function) to invoke the agent with a sample query and log the observation.
-- Update `README.md` with run/test instructions.
+- Add a smoke test in `tests/test_agent.py` that mocks the MCP response and validates tool output flow.
 
 ## Definition of Done
 - All acceptance criteria satisfied.
-- Tests/Demo run locally without errors and show the agent using `documentation_search`.
-- Basic logging in place for request/response and errors.
-- README updated with instructions.
+- Tests run locally without errors and show the agent using `documentation_search_tools`.
 
 ## References
 - PRD: `docs/prd.md`

@@ -26,7 +26,7 @@ This launches the Gradio UI (Blocks) with a textbox to ask questions and panes f
 
 ## Tests
 ```bash
-pytest -q
+python -m pytest
 ```
 
 ## Linting & Formatting
