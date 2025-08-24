@@ -1,7 +1,7 @@
 # Story 1.2: MCP Client Implementation
 
 ## Status
-Planned
+Completed
 
 ## User Story
 As a developer, I want to implement a client that connects to the MCP server's documentation tool and wrap it for agent use, so that the system can retrieve documentation on demand.
