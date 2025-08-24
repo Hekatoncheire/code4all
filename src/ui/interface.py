@@ -5,21 +5,25 @@ import gradio as gr
 from ..service import invoke_agent
 
 
-def create_interface() -> gr.Blocks:
-    with gr.Blocks(title="Code4all") as demo:
-        gr.Markdown("# Code4all")
-        with gr.Row():
-            query = gr.Textbox(label="Ask a question", placeholder="How do I ... with LangGraph?", lines=3)
-        with gr.Row():
-            submit = gr.Button("Submit")
-        with gr.Row():
-            answer = gr.Markdown(label="Answer")
-        with gr.Row():
-            logs = gr.Markdown(label="Agent Logs")
+def create_interface():
+    async def chat_fn(message: str, history: list[tuple[str, str]]):
+        # invoke_agent returns a ConversationTurn
+        turn = await invoke_agent(message)
+        # Convert final_answer blocks to markdown text
+        if getattr(turn, "final_answer", None):
+            answer = "\n\n".join(block.content for block in turn.final_answer)
+        else:
+            answer = "(No answer produced)"
+        return answer
 
-        def on_submit(q: str) -> tuple[str, str]:
-            a, l = invoke_agent(q)
-            return a, l
-
-        submit.click(on_submit, inputs=[query], outputs=[answer, logs])
+    demo = gr.ChatInterface(
+        fn=chat_fn,
+        title="Code4all",
+        description="Ask a question about LangGraph",
+        examples=[
+            ["What is LangGraph?"],
+            ["How do I use LangGraph?"],
+            ["What are the benefits of LangGraph?"],
+        ],
+    )
     return demo

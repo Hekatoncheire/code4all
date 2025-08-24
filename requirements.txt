@@ -7,3 +7,6 @@ pytest>=8.4.1
 black>=25.1.0
 isort>=6.0.1
 ruff>=0.12.10
+mcp
+langchain-mcp-adapters
+langchain-mistralai
