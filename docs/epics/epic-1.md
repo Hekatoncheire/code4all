@@ -32,7 +32,7 @@ Build and demonstrate a complete, tool-using ReAct agent from project setup to a
 
 ## User Stories and Acceptance Criteria
 
-### Story 1.1: Project Scaffolding & Environment Setup
+### Story 1.1: Project Scaffolding & Environment Setup - Completed
 User Story: As a developer, I want a well-defined project structure and a reproducible environment, so that I can start building the application efficiently and consistently.
 
 Acceptance Criteria:
@@ -41,7 +41,7 @@ Acceptance Criteria:
 3. A `README.md` includes project title and setup/run instructions.
 4. A basic "hello world" Gradio application launches from a main Python script.
 
-### Story 1.2: MCP Client Implementation
+### Story 1.2: MCP Client Implementation - Completed
 User Story: As a developer, I want to implement a client that connects to the MCP server's documentation tool and wrap it for agent use, so that the system can retrieve documentation on demand.
 
 Acceptance Criteria:
@@ -50,30 +50,21 @@ Acceptance Criteria:
 3. A basic LangGraph agent is configured with access to this tool.
 4. The agent can invoke the tool with a test query and process the returned documentation snippet.
 
-### Story 1.3: Implement the Coder Tool
-User Story: As a developer, I want a specialized tool that can generate Python code snippets based on provided documentation context, so that the ReAct agent has a code generation capability.
-
-Acceptance Criteria:
-1. A Python function takes a query and documentation context, prompting an LLM to generate a relevant code snippet.
-2. The function is wrapped into a LangChain Tool (e.g., `code_generator`).
-3. The tool can be tested independently and returns a formatted code string.
-
-### Story 1.4: Implement the ReAct Agent
+### Story 1.3: Implement the ReAct Agent - Completed
 User Story: As a developer, I want to implement a ReAct-style agent that can use a set of tools through a 'thought-action-observation' reasoning loop, so that it can autonomously solve multi-step problems.
 
 Acceptance Criteria:
 1. A ReAct agent is created using LangGraph.
-2. The agent has a toolkit containing both `documentation_search` and `code_generator`.
+2. The agent has a toolkit containing `documentation_search`.
 3. The agent's reasoning process (Thought, Action, Observation) is logged clearly.
-4. The agent answers a complex query by using both tools within one reasoning loop.
+4. The agent answers a complex query by using the tool within one reasoning loop.
 
-### Story 1.5: Integrate ReAct Agent into the Gradio UI
+### Story 1.4: Integrate ReAct Agent into the Gradio UI - Completed
 User Story: As a user, I want the Gradio UI to use the ReAct agent, so that I can ask complex questions and see the agent work through the problem to provide a final answer.
 
 Acceptance Criteria:
 1. The Gradio UI backend calls the ReAct agent.
 2. The UI displays the final answer (text or code).
-3. The agent's intermediate steps (thoughts and tool outputs) are streamed to a logging area in the UI.
 
 ## Risks & Mitigations
 - Model performance variability with open-source LLMs → Choose a small, locally runnable model known to work with LangChain; keep model easily swappable (NFR5).
@@ -83,6 +74,5 @@ Acceptance Criteria:
 ## Milestones
 - M1: Scaffolding + Hello Gradio
 - M2: MCP client tool integrated
-- M3: Coder tool implemented
-- M4: ReAct agent functional with both tools
-- M5: Gradio UI integration with logs
+- M3: Functional ReAct agent 
+- M4: Gradio UI integration
