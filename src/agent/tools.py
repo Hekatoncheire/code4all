@@ -12,7 +12,7 @@ class ToolBox:
         return await self.mcp_client.get_tools()
     
     def _wrap_async_tool(self, async_tool: BaseTool) -> BaseTool:
-        """Convert async MCP tools to sync for LangGraph compatibility."""
+        # Convert async MCP tools to sync for LangGraph compatibility
         def sync_invoke(**kwargs):
             try:
                 return asyncio.run(async_tool.ainvoke(kwargs))

@@ -1,11 +1,19 @@
+import sys
+import os
 import asyncio
 from unittest.mock import Mock, AsyncMock
 from langchain_core.tools import StructuredTool
 from pydantic import BaseModel, Field
 
-from src.agent.agent import Agent
-from src.agent.tools import ToolBox
-from src.client.mcp_client import MCPClient
+# Add both project root and src to Python path for imports
+project_root = os.path.join(os.path.dirname(__file__), '..')
+src_path = os.path.join(project_root, 'src')
+sys.path.insert(0, project_root)
+sys.path.insert(0, src_path)
+
+from agent.agent import Agent
+from agent.tools import ToolBox
+from client.mcp_client import MCPClient
 
 
 class MockToolInput(BaseModel):
@@ -13,7 +21,7 @@ class MockToolInput(BaseModel):
 
 
 def test_agent():
-    """Simple smoke test for the agent."""
+    # Simple smoke test for the agent
     mock_client = Mock(spec=MCPClient)
     mock_tool = StructuredTool(
         name="test-tool",
