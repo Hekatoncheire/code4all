@@ -15,7 +15,18 @@ class Agent:
         self.config = {"configurable": {"thread_id": "1"}}
         
     def invoke(self, query: str):
-        response = self.graph.invoke({"messages": [HumanMessage(content=query)]}, config=self.config)
+        # Get existing messages from the checkpoint
+        try:
+            current_state = self.graph.get_state(config=self.config)
+            past_messages = current_state.values.get("messages", []) if current_state.values else []
+        except:
+            past_messages = []
+        
+        # Append new human message to existing conversation
+        messages = past_messages + [HumanMessage(content=query)]
+        
+        response = self.graph.invoke({"messages": messages}, config=self.config)
+        
         # Extract the final message content
         messages = response.get("messages", [])
         final_content = messages[-1].content if messages else "No response"
