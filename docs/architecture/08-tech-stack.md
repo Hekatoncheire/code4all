@@ -10,35 +10,34 @@ This document summarizes the technologies used in Code4all. It builds on:
 
 ## Core Libraries & Frameworks
 - LangGraph — Agent graph and ReAct loop implementation
-- Gradio — UI (Blocks) for user interaction
-- Requests/HTTPX (TBD) — HTTP client for MCP server
-- Logging — Python standard library `logging`
+- LangChain MistralAI — Mistral Codestral model integration
+- Gradio — UI (ChatInterface) for user interaction
+- MCP (Model Context Protocol) — Context7 server integration
+- Pydantic — Data models and validation
+- python-dotenv — Environment variable management
 
 ## Agent & Tools
 - ReAct agent orchestrated by LangGraph
-- Tools:
-  - `documentation_search` — calls Context7 MCP server
-  - `code_generator` — LLM-backed code snippet generation
+- MCP tools via Context7 server:
+  - Documentation search and retrieval from LangGraph docs
+- InMemorySaver for conversation checkpoints
 
 ## Models
-- Open-source models only (no paid APIs), from Hugging Face where applicable
+- Mistral Codestral (open-source) via LangChain MistralAI
 - Model selection is swappable per PRD NFR5
 
-## Testing & Quality
+## Testing
 - pytest — unit testing
-- Black — code formatter (line length 100)
-- isort — import sorter (profile black)
-- Ruff (or Flake8 fallback) — linting
 
 ## Configuration & Secrets
-- `.env` in repo root for secrets like `MCP_API_KEY`
+- `.env` in repo root for secrets like `MCP_API_KEY` and `MCP_SERVER_URL`
 
 ## Packaging & Dependencies
-- `requirements.txt` with pinned versions
+- `requirements.txt` with pinned versions for base dependencies
 
 ## Execution
-- CLI/entry: `python main.py` or `python -m src.app` for UI
+- CLI/entry: `python3 main.py` or `python3 -m main` for Gradio UI
 
 ## References
 - See `02-architecture-details.md` for component layout
-- See `06-dev-and-next-steps.md` for local dev commands
+- See `06-dev-setup.md` for local dev commands

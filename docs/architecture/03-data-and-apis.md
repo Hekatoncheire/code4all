@@ -21,26 +21,17 @@ class ConversationTurn(BaseModel):
     intermediate_steps: List[AgentStep]
 ```
 
-## 3.2 Data Contracts (External Docs Chunks)
+## 3.2 Internal Service API
 ```python
-from typing import TypedDict, Optional
+from src.utils.models import ConversationTurn
 
-class DocumentChunk(TypedDict):
-    content: str
-    source: Optional[str]
-    score: Optional[float]
-```
-
-## 3.3 Internal Service API
-```python
-from src.data_models import ConversationTurn
-
-def invoke_agent(query: str, session_id: str) -> ConversationTurn:
+def invoke_agent(query: str) -> ConversationTurn:
     """Invoke the ReAct agent and return a structured result."""
     ...
 ```
 
-## 3.4 External APIs (Context7 MCP)
+## 3.3 External APIs (Context7 MCP)
 - Purpose: Retrieve LangGraph documentation for grounding.
-- Auth: `MCP_API_KEY` via environment (.env).
-- Endpoints / Rate limits / Schemas: TBD.
+- Auth: `MCP_API_KEY` and `MCP_SERVER_URL` via environment variables.
+- Protocol: MCP (Model Context Protocol) over HTTP transport.
+- Tools: Documentation search and retrieval via async MCP client.
